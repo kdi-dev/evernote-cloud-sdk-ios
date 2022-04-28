@@ -74,7 +74,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                 target:self
                                                                                 action:@selector(cancel:)];
@@ -97,6 +96,10 @@
     [self.webView addSubview:self.activityIndicator];
     [self updateUIForNewProfile:self.currentProfileName
            withAuthorizationURL:self.authorizationURL];
+
+    if (@available(iOS 13.0, *)) {
+        self.modalInPresentation = true;
+    }
 }
 
 - (void)cancel:(id)sender
