@@ -85,6 +85,7 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, copy) ENSessionProgressHandler progress;
 @property (nonatomic, strong) ENNoteStoreClient * noteStore;
 @property (nonatomic, strong) ENNoteRef * noteRef;
+@property (nonatomic, strong) NSMutableArray * resourceGuids;
 @end
 
 @interface ENSessionFindNotesContext : NSObject
@@ -852,14 +853,14 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     
     if (!note) {
         ENSDKLogError(@"must specify note");
-        completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeInvalidData userInfo:nil]);
+        completion(nil, nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeInvalidData userInfo:nil]);
         return;
     }
     
     if ((policy == ENSessionUploadPolicyReplace && !noteToReplace) ||
         (policy == ENSessionUploadPolicyReplaceOrCreate && !noteToReplace)) {
         ENSDKLogError(@"must specify existing ID when requesting a replacement policy");
-        completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeInvalidData userInfo:nil]);
+        completion(nil, nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeInvalidData userInfo:nil]);
         return;
     }
     
@@ -874,7 +875,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     }
     
     if (!self.isAuthenticated) {
-        completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeAuthExpired userInfo:nil]);
+        completion(nil, nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeAuthExpired userInfo:nil]);
         return;
     }
     
@@ -882,7 +883,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     // the sizes are a function of the user's service level, which can change.
     if (![note validateForLimits]) {
         ENSDKLogError(@"Note failed limits validation. Cannot upload. %@", self);
-        completion(nil, [ENError noteSizeLimitReachedError]);
+        completion(nil, nil, [ENError noteSizeLimitReachedError]);
     }
     
     ENSessionUploadNoteContext * context = [[ENSessionUploadNoteContext alloc] init];
@@ -896,6 +897,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     context.policy = policy;
     context.completion = completion;
     context.progress = progress;
+    context.resourceGuids = [[NSMutableArray alloc] init];
     
     [self uploadNote_determineDestinationWithContext:context];
 }
@@ -992,6 +994,11 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         }
 
         context.noteRef = context.refToReplace; // The result by definition has the same ref.
+
+        for (EDAMResource *resource in resultNote.resources) {
+            [context.resourceGuids addObject:resource.guid];
+        }
+
         [self uploadNote_completeWithContext:context error:nil];
     }];
 }
@@ -1082,7 +1089,13 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
             [self uploadNote_completeWithContext:context error:error];
             return;
         }
+
         context.noteRef.guid = resultNote.guid;
+
+        for (EDAMResource *resource in resultNote.resources) {
+            [context.resourceGuids addObject:resource.guid];
+        }
+
         [self uploadNote_completeWithContext:context error:nil];
     }];
 }
@@ -1094,7 +1107,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     context.noteStore.uploadProgressHandler = nil;
 #endif
     if (context.completion) {
-        context.completion(error ? nil : context.noteRef, error);
+        context.completion(error ? nil : context.noteRef, error ? nil : context.resourceGuids, error);
     }
 }
 
