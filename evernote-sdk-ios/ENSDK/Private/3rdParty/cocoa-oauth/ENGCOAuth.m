@@ -252,7 +252,7 @@ static BOOL GCOAuthUseHTTPSCookieStorage = YES;
     oauth.requestParameters = parameters;
     
     // create url
-    NSString *encodedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodedPath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
     NSString *URLString = [NSString stringWithFormat:@"%@://%@%@", scheme, host, encodedPath];
     if ([oauth.requestParameters count]) {
         NSString *query = [ENGCOAuth queryStringFromParameters:oauth.requestParameters];
@@ -283,8 +283,11 @@ static BOOL GCOAuthUseHTTPSCookieStorage = YES;
                                               tokenSecret:tokenSecret];
     oauth.HTTPMethod = @"POST";
     oauth.requestParameters = parameters;
-    NSURL *URL = [[NSURL alloc] initWithScheme:@"https" host:host path:path];
-    oauth.URL = URL;
+    NSURLComponents *URLC = [[NSURLComponents alloc] init];
+    URLC.scheme = @"https";
+    URLC.host = host;
+    URLC.path = path;
+    oauth.URL = URLC.URL;
     
     // create request
     NSMutableURLRequest *request = [oauth request];
@@ -305,11 +308,9 @@ static BOOL GCOAuthUseHTTPSCookieStorage = YES;
 @end
 @implementation NSString (GCOAuthAdditions)
 - (NSString *)pcen {
-    CFStringRef string = CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                 (CFStringRef)self,
-                                                                 NULL,
-                                                                 CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                 kCFStringEncodingUTF8);
-    return CFBridgingRelease(string);
+    // Initial URL character set doesn't matter, because removed characters masks differences between them.
+    NSMutableCharacterSet *cs = [[NSCharacterSet URLPathAllowedCharacterSet] mutableCopy];
+    [cs removeCharactersInString:@"!*'();:@&=+$,/?%#[]"];
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:cs];
 }
 @end

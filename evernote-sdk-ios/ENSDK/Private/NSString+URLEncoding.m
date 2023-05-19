@@ -31,18 +31,16 @@
 @implementation NSString (URLEncoding)
 - (NSString *)en_stringByUrlEncoding
 {
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                 (CFStringRef)self,
-                                                                                 NULL,
-                                                                                 (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
-                                                                                 kCFStringEncodingUTF8));
+    // Initial URL character set doesn't matter, because removed characters masks differences between them.
+    NSMutableCharacterSet *cs = [[NSCharacterSet URLPathAllowedCharacterSet] mutableCopy];
+    [cs removeCharactersInString:@"!*'\"();:@&=+$,/?%#[]% "];
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:cs];
 }
 
 - (NSString *)en_stringByUrlDecoding
 {
-	return (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
-                                                                                                 (CFStringRef)self,
-                                                                                                 CFSTR(""),
-                                                                                                 kCFStringEncodingUTF8));
+	return (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault,
+                                                                                    (CFStringRef)self,
+                                                                                    CFSTR("")));
 }
 @end
