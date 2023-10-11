@@ -10,7 +10,7 @@
 
 @implementation ENCommonUtils
 
-BOOL IsIOS8() {
+BOOL IsIOS8(void) {
     if([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         return YES;
     }else {
@@ -18,7 +18,7 @@ BOOL IsIOS8() {
     }
 }
 
-BOOL IsEvernoteInstalled() {
+BOOL IsEvernoteInstalled(void) {
     return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"en://"]];
 }
 

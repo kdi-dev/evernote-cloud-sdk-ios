@@ -50,11 +50,11 @@
     return [UIColor colorWithRed:210.0/255.0 green:210.0/255.0 blue:210.0/255.0 alpha:1];
 }
 
-BOOL IsIPad() {
+BOOL IsIPad(void) {
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }
 
-CGFloat OnePxHeight() {
+CGFloat OnePxHeight(void) {
     return 1.0/[UIScreen mainScreen].scale;
 }
 
