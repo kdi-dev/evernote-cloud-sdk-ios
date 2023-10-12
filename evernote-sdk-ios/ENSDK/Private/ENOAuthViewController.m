@@ -156,10 +156,12 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.authorizationURL]];
 }
 
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < 60000)
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
+#endif
 
 # pragma mark - WKNavigationDelegate
 
