@@ -1498,7 +1498,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         result.created = [NSDate dateWithEDAMTimestamp:[metadata.created longLongValue]];
         result.updated = [NSDate dateWithEDAMTimestamp:[metadata.updated longLongValue]];
         result.updateSequenceNum = [metadata.updateSequenceNum intValue];
-        result.hasResources = (metadata.largestResourceSize > 0)?YES:NO;
+        result.hasResources = ([metadata.largestResourceSize intValue] > 0)?YES:NO;
 
         [findNotesResults addObject:result];
         
