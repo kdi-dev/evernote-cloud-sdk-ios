@@ -35,10 +35,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ENTProtocol.h"
-#import "ENTException.h"
-#import "FATObject.h"
-#import "EDAMTypes.h"
+#import <EvernoteSDK/ENTProtocol.h>
+#import <EvernoteSDK/ENTException.h>
+#import <EvernoteSDK/FATObject.h>
+#import <EvernoteSDK/EDAMTypes.h>
 
 enum EDAMErrorCode {
   EDAMErrorCode_UNKNOWN = 1,

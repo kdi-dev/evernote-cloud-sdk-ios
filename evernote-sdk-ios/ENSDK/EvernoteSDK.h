@@ -26,37 +26,37 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ENNotebook.h"
-#import "ENNoteRef.h"
-#import "ENNoteContent.h"
-#import "ENNote.h"
-#import "ENNoteSearch.h"
-#import "ENResource.h"
-#import "ENError.h"
-#import "ENSession.h"
-#import "ENCommonUtils.h"
-#import "ENSDKLogging.h"
+#import <EvernoteSDK/ENNotebook.h>
+#import <EvernoteSDK/ENNoteRef.h>
+#import <EvernoteSDK/ENNoteContent.h>
+#import <EvernoteSDK/ENNote.h>
+#import <EvernoteSDK/ENNoteSearch.h>
+#import <EvernoteSDK/ENResource.h>
+#import <EvernoteSDK/ENError.h>
+#import <EvernoteSDK/ENSession.h>
+#import <EvernoteSDK/ENCommonUtils.h>
+#import <EvernoteSDK/ENSDKLogging.h>
 
-#import "ENSaveToEvernoteActivity.h"
+#import <EvernoteSDK/ENSaveToEvernoteActivity.h>
 
 //Advanced
-#import "ENSDKAdvanced.h"
-#import "EDAM.h"
-#import "ENThrift.h"
+#import <EvernoteSDK/ENSDKAdvanced.h>
+#import <EvernoteSDK/EDAM.h>
+#import <EvernoteSDK/ENThrift.h>
 
-#import "ENNoteStoreClient.h"
-#import "ENUserStoreClient.h"
-#import "ENBusinessNoteStoreClient.h"
-#import "ENPreferencesStore.h"
-#import "ENMLConstants.h"
-#import "ENMLUtility.h"
-#import "NSData+EvernoteSDK.h"
-#import "NSDate+EDAMAdditions.h"
-#import "ENEncryptedContentInfo.h"
-#import "ENMIMEUtils.h"
-#import "ENMLWriter.h"
-#import "ENXMLDTD.h"
-#import "ENXMLUtils.h"
-#import "ENXMLWriter.h"
-#import "NSRegularExpression+ENAGRegex.h"
-#import "NSString+EDAMNilAdditions.h"
+#import <EvernoteSDK/ENNoteStoreClient.h>
+#import <EvernoteSDK/ENUserStoreClient.h>
+#import <EvernoteSDK/ENBusinessNoteStoreClient.h>
+#import <EvernoteSDK/ENPreferencesStore.h>
+#import <EvernoteSDK/ENMLConstants.h>
+#import <EvernoteSDK/ENMLUtility.h>
+#import <EvernoteSDK/NSData+EvernoteSDK.h>
+#import <EvernoteSDK/NSDate+EDAMAdditions.h>
+#import <EvernoteSDK/ENEncryptedContentInfo.h>
+#import <EvernoteSDK/ENMIMEUtils.h>
+#import <EvernoteSDK/ENMLWriter.h>
+#import <EvernoteSDK/ENXMLDTD.h>
+#import <EvernoteSDK/ENXMLUtils.h>
+#import <EvernoteSDK/ENXMLWriter.h>
+#import <EvernoteSDK/NSRegularExpression+ENAGRegex.h>
+#import <EvernoteSDK/NSString+EDAMNilAdditions.h>

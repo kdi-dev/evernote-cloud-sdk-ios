@@ -17,7 +17,7 @@
  * under the License.
  */
 
-#import "ENTException.h"
+#import <EvernoteSDK/ENTException.h>
 
 @protocol ENTTransport <NSObject>
 

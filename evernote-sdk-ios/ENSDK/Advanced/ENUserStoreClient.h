@@ -26,8 +26,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ENStoreClient.h"
-#import "EDAM.h"
+#import <EvernoteSDK/ENStoreClient.h>
+#import <EvernoteSDK/EDAM.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

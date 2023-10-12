@@ -17,8 +17,8 @@
  * under the License.
  */
 
-#import "ENTProtocol.h"
-#import "ENTTransport.h"
+#import <EvernoteSDK/ENTProtocol.h>
+#import <EvernoteSDK/ENTTransport.h>
 
 @interface ENTBinaryProtocol : NSObject <ENTProtocol>
 

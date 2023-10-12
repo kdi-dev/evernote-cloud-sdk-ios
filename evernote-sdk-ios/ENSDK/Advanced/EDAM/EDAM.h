@@ -26,9 +26,9 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "EDAMLimits.h"
-#import "EDAMNoteStore.h"
-#import "EDAMTypes.h"
-#import "EDAMUserStore.h"
-#import "EDAMErrors.h"
-#import "EDAMAuthenticationTypes.h"
+#import <EvernoteSDK/EDAMLimits.h>
+#import <EvernoteSDK/EDAMNoteStore.h>
+#import <EvernoteSDK/EDAMTypes.h>
+#import <EvernoteSDK/EDAMUserStore.h>
+#import <EvernoteSDK/EDAMErrors.h>
+#import <EvernoteSDK/EDAMAuthenticationTypes.h>

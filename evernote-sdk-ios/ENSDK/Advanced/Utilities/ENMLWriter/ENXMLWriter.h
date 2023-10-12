@@ -28,7 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ENXMLDTD.h"
+#import <EvernoteSDK/ENXMLDTD.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

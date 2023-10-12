@@ -18,7 +18,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "ENTTransport.h"
+#import <EvernoteSDK/ENTTransport.h>
 
 @interface ENTHTTPClient : NSObject <ENTTransport>
 
